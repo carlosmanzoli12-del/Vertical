@@ -15,7 +15,7 @@ Planned modules:
 
 ## Build
 
-The initial Windows CI workflow is being added. See `.github/workflows` after the first workflow commit.
+A starter CI workflow is available at `.github/workflows/ci.yml`. It configures, compiles, and runs the core smoke test on Windows and Ubuntu. This is not yet a packaged OBS plugin build; OBS SDK integration is the next milestone.
 
 ## Security
 
