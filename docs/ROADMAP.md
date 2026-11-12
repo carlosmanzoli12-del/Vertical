@@ -1,28 +1,36 @@
-# Roadmap
+# Roadmap — prioritized scope
 
-## Foundation
-- [x] Repository and CMake skeleton
-- [x] Cross-platform CI smoke build and unit test
-- [x] Normalized chat, alert, and output-profile domain models
-- [ ] OBS Studio 30.0.2 SDK integration and native dock
+The active scope is limited to native OBS integration, multistream, platform login/OAuth, and the in-OBS user interface. Unified chat, alerts, and overlays are deferred.
 
-## Streaming
-- [ ] Multi-output encoder/session manager
-- [ ] Twitch output adapter
-- [ ] TikTok output adapter
-- [ ] Per-platform ingest configuration and health status
+## Native OBS Studio 30.0.2 integration
+- [x] Portable C++ core and CMake test foundation
+- [x] Initial OBS module entry point and OBS-managed dock widget source
+- [x] Optional CMake target for libobs, obs-frontend-api, and Qt 6
+- [ ] Pin and provision the exact OBS 30.0.2 build dependencies in CI
+- [ ] Compile and load the module in OBS Studio 30.0.2 on Windows
+- [ ] Verify dock lifecycle, reload, and clean unload
 
-## Community
-- [x] Unified chat message data contract
-- [ ] Twitch chat adapter
-- [ ] TikTok chat adapter (subject to supported API/access)
-- [x] Normalized alert event data contract
-- [ ] Alert event bus and browser overlay
+## Multistream
+- [ ] Multi-output manager using supported OBS output/encoder APIs
+- [ ] Independent Twitch and TikTok output configuration
+- [ ] Start/stop, per-destination status, retries, and error reporting
+- [ ] Validate simultaneous outputs without destabilizing OBS
 
-## Accounts and security
-- [ ] OAuth flows using official platform endpoints
-- [ ] Secure token storage; never store stream keys in source control
+## Login and OAuth
+- [ ] Twitch authorization using official OAuth flow
+- [ ] TikTok authorization only where official API/app permissions allow it
+- [ ] Secure token storage using the operating-system credential store
+- [ ] Token refresh, revocation, and disconnect flows
 
-The current chat and alert models are platform-neutral data contracts only; they do not connect to platform APIs yet. Output profiles validate RTMP/RTMPS endpoints and reference credentials stored elsewhere; they do not transmit video yet.
+## In-OBS interface
+- [x] Initial native dock source
+- [ ] Account connection and status views
+- [ ] Destination setup and stream controls
+- [ ] Visual polish, accessibility, and localization
+- [ ] Persist user settings safely
 
-TikTok ingest credentials and feature availability depend on account eligibility and platform-issued access. The application will not bypass platform restrictions or fabricate credentials.
+## Current limitations
+
+The dock is a source-level foundation only. Its connection and multistream controls are intentionally disabled until their backends exist. No successful OBS 30.0.2 plugin build or runtime test has yet been recorded.
+
+TikTok ingest and API features depend on account eligibility and platform-issued access. The application will use authorized APIs only and will not fabricate or bypass credentials.
