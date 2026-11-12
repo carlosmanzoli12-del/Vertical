@@ -11,7 +11,7 @@ The portable C++ core currently contains:
 - Output profile validation for RTMP/RTMPS endpoints with an external secret reference
 - CMake tests for the core models
 
-These are foundation components, not complete platform integrations. There is not yet an installable OBS plugin, live Twitch/TikTok transport, OAuth login, unified live chat connection, alert renderer, or installer.
+These are foundation components, not complete platform integrations. A first native OBS module/dock source skeleton has been added on the development branch. It is not yet verified against an OBS 30.0.2 SDK and does not yet provide working OAuth or multistream. Live Twitch/TikTok transport, account authorization, and installer remain pending. The current scope prioritizes native OBS integration, multistream, OAuth, and the in-OBS interface; chat and alerts are deferred.
 
 ## Build
 
