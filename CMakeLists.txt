@@ -19,6 +19,8 @@ else()
   target_compile_options(streamforge_core PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
+include(cmake/obs-plugin.cmake)
+
 if(STREAMFORGE_BUILD_TESTS)
   enable_testing()
   add_executable(streamforge_core_tests tests/core_tests.cpp)
