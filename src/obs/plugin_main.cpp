@@ -1,6 +1,5 @@
 #include <obs-module.h>
 #include <obs-frontend-api.h>
-#include <QDockWidget>
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -10,7 +9,7 @@ OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE("streamforge", "en-US")
 
 namespace {
-QDockWidget *streamforgeDock = nullptr;
+QWidget *streamforgeDock = nullptr;
 
 QWidget *createDockContents()
 {
@@ -29,6 +28,8 @@ QWidget *createDockContents()
     auto *outputStatus = new QLabel(QObject::tr("Transmissões: ainda não iniciadas"));
     auto *connectTwitch = new QPushButton(QObject::tr("Conectar Twitch"));
     auto *connectTikTok = new QPushButton(QObject::tr("Conectar TikTok"));
+    connectTwitch->setEnabled(false);
+    connectTikTok->setEnabled(false);
     auto *startButton = new QPushButton(QObject::tr("Iniciar multistream"));
     auto *stopButton = new QPushButton(QObject::tr("Parar multistream"));
     startButton->setEnabled(false);
@@ -61,9 +62,8 @@ bool obs_module_load(void)
 {
     if (streamforgeDock)
         return true;
-    streamforgeDock = new QDockWidget(QStringLiteral("StreamForge"));
+    streamforgeDock = createDockContents();
     streamforgeDock->setObjectName(QStringLiteral("StreamForgeDock"));
-    streamforgeDock->setWidget(createDockContents());
     if (!obs_frontend_add_dock_by_id("streamforge.main", "StreamForge", streamforgeDock)) {
         delete streamforgeDock;
         streamforgeDock = nullptr;
